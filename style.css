@@ -24,3 +24,32 @@ button {
 button:hover { transform: scale(1.05); }
 li { cursor: pointer; padding: 8px; background: #fff3; margin: 4px; border-radius: 6px; }
 li:hover { background: #fff6; text-decoration: line-through; }
+.navbar {
+  background-color: #0d1424;
+  border-bottom: 2px solid #2f81f7;
+  padding: 22px 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #9aa4b2;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.25s;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+html {
+  scroll-behavior: smooth;
+}
