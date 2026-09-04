@@ -22,3 +22,5 @@ button {
 }
 
 button:hover { transform: scale(1.05); }
+li { cursor: pointer; padding: 8px; background: #fff3; margin: 4px; border-radius: 6px; }
+li:hover { background: #fff6; text-decoration: line-through; }
