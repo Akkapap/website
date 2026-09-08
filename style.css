@@ -5,6 +5,7 @@ html {
 body {
   margin: 0;
   font-family: sans-serif;
+  background-color: #080810;
 }
 
 .navbar {
@@ -16,6 +17,7 @@ body {
   padding: 20px 40px;
   background: #222;
   color: #fff;
+  z-index: 1000; /* ให้อยู่เหนือชั้นอื่นๆ */
 }
 
 .nav-links {
@@ -39,12 +41,45 @@ body {
   align-items: center;
   text-align: center;
   scroll-margin-top: 80px;
-}
-#home {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
+  box-sizing: border-box;
 }
 
+/* ---------- ส่วนหน้าแรก / Hero Section (แก้ไขแล้ว) ---------- */
+#home {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #080810;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* บังคับ Canvas ให้อยู่ชั้นหลังสุด */
+#particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* บังคับข้อความให้อยู่ตรงกลาง และลอยทับอยู่ชั้นบน */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+}
+
+/* ---------- ส่วนอื่นๆ ---------- */
 #about {
   background: #f4f4f4;
 }
@@ -66,6 +101,7 @@ p {
   font-size: 18px;
   line-height: 1.7;
 }
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -110,6 +146,7 @@ p {
   border-radius: 999px;
   margin-right: 6px;
 }
+
 /* ---------- ปุ่ม ---------- */
 .subtitle {
   font-size: 20px;
@@ -196,6 +233,7 @@ p {
   margin-top: 20px;
   opacity: 0.6;
 }
+
 /* ---------- ปุ่มแฮมเบอร์เกอร์ ---------- */
 .hamburger {
   display: none;
@@ -215,7 +253,6 @@ p {
   transition: transform 0.3s, opacity 0.3s;
 }
 
-/* ตอนกดเปิด → ขีดกลายเป็นกากบาท */
 .hamburger.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
@@ -226,7 +263,7 @@ p {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* ---------- เฉพาะจอเล็กกว่า 768px ---------- */
+/* ---------- Responsive จอเล็กกว่า 768px ---------- */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
@@ -260,6 +297,7 @@ p {
     padding: 16px 0;
   }
 }
+
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -270,6 +308,7 @@ p {
   opacity: 1;
   transform: translateY(0);
 }
+
 /* ---------- About ---------- */
 .about-wrap {
   display: flex;
@@ -285,13 +324,7 @@ p {
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
-  font-size: 72px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
   flex-shrink: 0;
 }
 
@@ -337,4 +370,14 @@ p {
   height: 100%;
   background: linear-gradient(90deg, #667eea, #764ba2);
   border-radius: 999px;
+}
+.profile-pic {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* เปลี่ยนสัญลักษณ์เมาส์เป็นรูปมือ */
+}
+
+/* เมื่อเอาเมาส์ไปชี้ รูปจะขยายขึ้นเล็กน้อยและมีเงาเรืองแสง */
+.profile-pic:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(225, 48, 108, 0.6); /* เงาน้ำตาล-ชมพูโทน IG */
 }

@@ -2,115 +2,139 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Akkapap Portfolio</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const navLinks  = document.getElementById('navLinks');
-
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('open');
-  });
-
-  // กดเมนูแล้วปิดเอง
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('open');
-    });
-  });
-</script>
 <body>
 
- <nav class="navbar">
-  <div class="logo">MyPortfolio</div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">MyPortfolio</div>
 
-  <button class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#home">หน้าแรก</a></li>
-    <li><a href="#about">เกี่ยวกับ</a></li>
-    <li><a href="#projects">ผลงาน</a></li>
-    <li><a href="#contact">ติดต่อ</a></li>
-  </ul>
-</nav>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">หน้าแรก</a></li>
+      <li><a href="#about">เกี่ยวกับ</a></li>
+      <li><a href="#projects">ผลงาน</a></li>
+      <li><a href="#contact">ติดต่อ</a></li>
+    </ul>
+  </nav>
 
+  <!-- Home Section -->
   <section id="home" class="section">
-  <h1>สวัสดีครับ ผมชื่อ [AKkapap Suriyaprapa]</h1>
-  <p class="subtitle">นักพัฒนาเว็บไซต์มือใหม่ที่กำลังเรียนรู้ทุกวัน</p>
+    <canvas id="particle-canvas"></canvas>
 
-  <div class="btn-group">
-    <a href="#projects" class="btn btn-primary">ดูผลงาน</a>
-    <a href="#contact" class="btn btn-outline">ติดต่อผม</a>
-  </div>
-</section>
+    <div class="hero-content">
+      <h1>สวัสดีครับ ผมชื่อ </h1>
+      </h1>Akkapap Suriyaprapa</h1>
+      <p class="subtitle">นักพัฒนาเว็บไซต์มือใหม่ที่กำลังเรียนรู้ทุกวัน</p>
 
- <section id="about" class="section">
-  <h2>เกี่ยวกับผม</h2>
-
-  <div class="about-wrap">
-    <img src="Akkapap.jpg" alt="รูปโปรไฟล์" class="profile-pic">
-
-    <div class="about-text">
-      <p>
-        สวัสดีครับ ผมจบการศึกษาระดับ<strong>ปริญญาตรี วิศวกรรมคอมพิวเตอร์</strong>
-      </p>
-      <p>
-        มีความรู้ด้าน<strong>การเขียนโค้ด</strong>, <strong>UX/UI</strong>,
-        <strong>การสร้างเว็บไซต์</strong> และ <strong>3D Model</strong>
-      </p>
-      <p>
-        ชอบเรียนรู้สิ่งใหม่ ๆ และลงมือทำจริงเสมอครับ
-      </p>
+      <div class="btn-group">
+        <a href="#projects" class="btn btn-primary">ดูผลงาน</a>
+        <a href="#contact" class="btn btn-outline">ติดต่อผม</a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-  
+  <!-- About Section -->
+  <section id="about" class="section">
+    <h2>เกี่ยวกับผม</h2>
+
+    <div class="about-wrap">
+      <a href="https://www.instagram.com/akpsrypp__" target="_blank">
+  <img src="Akkapap.jpg" alt="รูปโปรไฟล์" class="profile-pic">
+</a>
+
+      <div class="about-text">
+        <p>
+          สวัสดีครับ ผมจบการศึกษาระดับ <strong>ปริญญาตรี วิศวกรรมคอมพิวเตอร์</strong>
+        </p>
+        <p>
+          มีความรู้ด้าน <strong>การเขียนโค้ด</strong>, <strong>UX/UI</strong>,
+          <strong>การสร้างเว็บไซต์</strong> และ <strong>3D Model</strong>
+        </p>
+        <p>
+          ชอบเรียนรู้สิ่งใหม่ ๆ และลงมือทำจริงเสมอครับ
+        </p>
+        <p>
+          <strong>ประสบการณ์ฝึกงาน:</strong><br>
+          - <strong>เงินเทอร์โบ จำกัด มหาชน</strong> (5 เดือน)<br>
+          - <strong>Unithai Shipyard and Engineering</strong> (1 เดือน)<br>
+          - <strong>Agentplus.Th</strong> (9 เดือน)
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <h2>ผลงาน</h2>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <h3>เว็บไซต์แรกของผม</h3>
+        <p>เว็บ Portfolio ที่ทำด้วย HTML และ CSS</p>
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+      </div>
+
+      <div class="card">
+        <h3>โปรเจกต์ที่สอง</h3>
+        <p>กำลังวางแผนอยู่ครับ เร็ว ๆ นี้</p>
+        <span class="tag">JavaScript</span>
+      </div>
+
+      <div class="card">
+        <h3>โปรเจกต์ที่สาม</h3>
+        <p>รอติดตามได้เลย</p>
+        <span class="tag">Coming Soon</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact / Footer Section -->
   <footer id="contact" class="footer">
-  <h2>ติดต่อผม</h2>
-  <p>สนใจร่วมงานหรืออยากคุยเล่น ทักมาได้เลยครับ</p>
+    <h2>ติดต่อผม</h2>
+    <p>สนใจร่วมงานหรืออยากคุยเล่น ทักมาได้เลยครับ</p>
 
-  <div class="social-links">
-    <a href="mailto:akkapapsuriyaprapa@gmail.com">Email</a>
-    <a href="https://github.com/Akkapap/website" target="_blank">GitHub</a>
-    <a href="https://www.facebook.com/sungreantep?locale=th_TH" target="_blank">Facebook</a>
-  </div>
+    <div class="social-links">
+      <a href="mailto:akkapapsuriyaprapa@gmail.com">Email</a>
+      <a href="https://github.com/Akkapap/website" target="_blank">GitHub</a>
+      <a href="https://www.facebook.com/sungreantep?locale=th_TH" target="_blank">Facebook</a>
+    </div>
 
-  <p class="copyright">© 2026 สงวนลิขสิทธิ์</p>
-</footer>
+    <p class="copyright">© 2026 สงวนลิขสิทธิ์</p>
+  </footer>
+
+  <!-- Script สำหรับปุ่ม Hamburger Navbar -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+
+    // กดเมนูแล้วปิดเอง
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
+
+  <!-- Script สำหรับดาวเคลื่อนไหว บน Canvas -->
+  <script src="script.js"></script>
 
 </body>
 </html>
-<section id="projects" class="section">
-  <h2>ผลงาน</h2>
-
-  <div class="card-grid">
-
-    <div class="card">
-      <h3>เว็บไซต์แรกของผม</h3>
-      <p>เว็บ Portfolio ที่ทำด้วย HTML และ CSS</p>
-      <span class="tag">HTML</span>
-      <span class="tag">CSS</span>
-    </div>
-
-    <div class="card">
-      <h3>โปรเจกต์ที่สอง</h3>
-      <p>กำลังวางแผนอยู่ครับ เร็ว ๆ นี้</p>
-      <span class="tag">JavaScript</span>
-    </div>
-
-    <div class="card">
-      <h3>โปรเจกต์ที่สาม</h3>
-      <p>รอติดตามได้เลย</p>
-      <span class="tag">Coming Soon</span>
-    </div>
-
-  </div>
-</section>
