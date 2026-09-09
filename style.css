@@ -381,3 +381,24 @@ p {
   transform: scale(1.08);
   box-shadow: 0 0 15px rgba(225, 48, 108, 0.6); /* เงาน้ำตาล-ชมพูโทน IG */
 }
+.lang-switch {
+  display: flex;
+  gap: 4px; /* กำหนดระยะห่างระหว่างปุ่ม EN กับ TH ให้ชิดกัน */
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid #555;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.3s;
+}
+
+.lang-btn.active,
+.lang-btn:hover {
+  background: #6c5ce7;
+  border-color: #6c5ce7;
+}

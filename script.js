@@ -1,5 +1,5 @@
 // ==========================================
-// 1. โค้ด หิ่งห้อยเรืองแสง + แตะแล้วลาก/ผลักได้
+// 1. โค้ด Canvas หิ่งห้อยเรืองแสง + โต้ตอบเมาส์
 // ==========================================
 const canvas = document.getElementById('particle-canvas');
 
@@ -8,11 +8,10 @@ if (canvas) {
     let particlesArray = [];
     const numberOfParticles = 80;
 
-    // เก็บตำแหน่งเมาส์และการกดลาก
     const mouse = {
         x: null,
         y: null,
-        radius: 120, // ระยะรัศมีที่จะส่งผลกับหิ่งห้อย
+        radius: 120,
         isPressed: false
     };
 
@@ -22,7 +21,6 @@ if (canvas) {
     }
     setCanvasSize();
 
-    // ดักจับการเคลื่อนที่และการคลิก/แตะของเมาส์และหน้าจอสัมผัส
     window.addEventListener('mousemove', (e) => {
         mouse.x = e.x;
         mouse.y = e.y;
@@ -53,32 +51,26 @@ if (canvas) {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 4 + 2; // ขนาดหิ่งห้อย
+            this.size = Math.random() * 4 + 2;
             this.speedX = (Math.random() - 0.5) * 1.2;
             this.speedY = (Math.random() - 0.5) * 1.2;
-            this.color = `hsl(${Math.random() * 50 + 45}, 100%, 70%)`; // สีเขียวอมเหลืองหิ่งห้อย
-            this.baseX = this.x;
-            this.baseY = this.y;
+            this.color = `hsl(${Math.random() * 50 + 45}, 100%, 70%)`;
             this.density = (Math.random() * 20) + 1;
         }
 
         update() {
-            // คำนวณระยะห่างระหว่างหิ่งห้อยกับตำแหน่งเมาส์
             let dx = mouse.x - this.x;
             let dy = mouse.y - this.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
 
-            // ถ้าเมาส์ขยับมาใกล้หิ่งห้อย
             if (distance < mouse.radius) {
                 let forceDirectionX = dx / distance;
                 let forceDirectionY = dy / distance;
 
                 if (mouse.isPressed) {
-                    // ถ้ากดคลิกค้าง/แตะลาก → ดึงหิ่งห้อยเข้าหาเมาส์
                     this.x += forceDirectionX * 5;
                     this.y += forceDirectionY * 5;
                 } else {
-                    // ถ้าเอามือ/เมาส์ไปเฉียด → ผลักหิ่งห้อยกระจายหนีออกจากเมาส์
                     let force = (mouse.radius - distance) / mouse.radius;
                     let directionX = forceDirectionX * force * this.density;
                     let directionY = forceDirectionY * force * this.density;
@@ -87,12 +79,10 @@ if (canvas) {
                     this.y -= directionY;
                 }
             } else {
-                // ขยับลอยไปมาปกติ
                 this.x += this.speedX;
                 this.y += this.speedY;
             }
 
-            // ชนขอบจอแล้วเด้งกลับ
             if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
             if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
         }
@@ -100,7 +90,7 @@ if (canvas) {
         draw() {
             ctx.fillStyle = this.color;
             ctx.shadowBlur = 15;
-            ctx.shadowColor = this.color; // แสงฟุ้งเรืองแสงแบบหิ่งห้อย
+            ctx.shadowColor = this.color;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
@@ -128,55 +118,83 @@ if (canvas) {
 }
 
 // ==========================================
-// 2. โค้ดฟังก์ชันปุ่มต่างๆ (เปลี่ยนสี/ทักทาย/To-Do List)
+// 2. คลังคำแปลระบบสลับ 2 ภาษา (TH / EN) ครบทุกส่วน
 // ==========================================
-const สี = ["#667eea", "#f5576c", "#43e97b", "#fa709a", "#30cfd0"];
-let i = 0;
+const translations = {
+  th: {
+    nav_home: "หน้าแรก",
+    nav_about: "เกี่ยวกับ",
+    nav_projects: "ผลงาน",
+    nav_contact: "ติดต่อ",
+    hero_title: "สวัสดีครับ ผมชื่อ Akkapap Suriyaprapa",
+    hero_subtitle: "นักพัฒนาเว็บไซต์มือใหม่ที่กำลังเรียนรู้ทุกวัน",
+    btn_projects: "ดูผลงาน",
+    btn_contact: "ติดต่อผม",
+    about_title: "เกี่ยวกับผม",
+    about_p1: "สวัสดีครับ ผมจบการศึกษาระดับ ปริญญาตรี วิศวกรรมคอมพิวเตอร์",
+    about_p2: "มีความรู้ด้าน การเขียนโค้ด, UX/UI, การสร้างเว็บไซต์ และ 3D Model",
+    about_p3: "ชอบเรียนรู้สิ่งใหม่ ๆ และลงมือทำจริงเสมอครับ",
+    exp_title: "ประสบการณ์ฝึกงาน:",
+    exp_1: "เงินเทอร์โบ จำกัด มหาชน (5 เดือน)",
+    exp_2: "Unithai Shipyard and Engineering (1 เดือน)",
+    exp_3: "Agentplus.Th (9 เดือน)",
+    projects_title: "ผลงาน",
+    proj1_title: "เว็บไซต์แรกของผม",
+    proj1_desc: "เว็บ Portfolio ที่ทำด้วย HTML และ CSS",
+    proj2_title: "โปรเจกต์ที่สอง",
+    proj2_desc: "กำลังวางแผนอยู่ครับ เร็ว ๆ นี้",
+    proj3_title: "โปรเจกต์ที่สาม",
+    proj3_desc: "รอติดตามได้เลย",
+    contact_title: "ติดต่อผม",
+    contact_desc: "สนใจร่วมงานหรืออยากคุยเล่น ทักมาได้เลยครับ"
+  },
+  en: {
+    nav_home: "Home",
+    nav_about: "About",
+    nav_projects: "Projects",
+    nav_contact: "Contact",
+    hero_title: "Hello, I'm Akkapap Suriyaprapa",
+    hero_subtitle: "Junior Web Developer learning every day",
+    btn_projects: "View Projects",
+    btn_contact: "Contact Me",
+    about_title: "About Me",
+    about_p1: "Hello! I graduated with a Bachelor's Degree in Computer Engineering.",
+    about_p2: "Proficient in Coding, UX/UI, Web Development, and 3D Modeling.",
+    about_p3: "Always eager to learn new technologies and gain hands-on experience.",
+    exp_title: "Internship Experience:",
+    exp_1: "Ngern Turbo Public Company Limited (5 months)",
+    exp_2: "Unithai Shipyard and Engineering (1 month)",
+    exp_3: "Agentplus.Th (9 months)",
+    projects_title: "Projects",
+    proj1_title: "My First Website",
+    proj1_desc: "A Portfolio website built with HTML and CSS.",
+    proj2_title: "Second Project",
+    proj2_desc: "Currently planning, coming soon!",
+    proj3_title: "Third Project",
+    proj3_desc: "Stay tuned!",
+    contact_title: "Contact Me",
+    contact_desc: "Interested in working together? Feel free to reach out!"
+  }
+};
 
-const btnColor = document.getElementById("btn");
-if (btnColor) {
-    btnColor.addEventListener("click", () => {
-        i = (i + 1) % สี.length;
-        document.body.style.background = สี[i];
-        const output = document.getElementById("output");
-        if (output) output.textContent = "เปลี่ยนสีแล้ว! " + สี[i];
-    });
+const langTh = document.getElementById("lang-th");
+const langEn = document.getElementById("lang-en");
+
+function changeLanguage(lang) {
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    const key = element.getAttribute("data-i18n");
+    if (translations[lang] && translations[lang][key]) {
+      element.innerText = translations[lang][key];
+    }
+  });
+
+  if (langTh && langEn) {
+    langTh.classList.toggle("active", lang === "th");
+    langEn.classList.toggle("active", lang === "en");
+  }
 }
 
-const btnGreet = document.getElementById("greet");
-if (btnGreet) {
-    btnGreet.addEventListener("click", () => {
-        const nameInput = document.getElementById("name");
-        const msg = document.getElementById("msg");
-        const name = nameInput ? nameInput.value : "";
-
-        if (msg) {
-            if (name === "") {
-                msg.textContent = "กรอกชื่อก่อนสิครับ 😅";
-            } else {
-                msg.textContent = "สวัสดีครับคุณ " + name + "! 👋";
-            }
-        }
-    });
-}
-
-const btnAdd = document.getElementById("add");
-if (btnAdd) {
-    btnAdd.addEventListener("click", () => {
-        const taskInput = document.getElementById("task");
-        const list = document.getElementById("list");
-        const task = taskInput ? taskInput.value : "";
-
-        if (task === "" || !list) return;
-
-        const li = document.createElement("li");
-        li.textContent = task;
-
-        li.addEventListener("click", () => {
-            li.remove();
-        });
-
-        list.appendChild(li);
-        if (taskInput) taskInput.value = "";
-    });
+if (langTh && langEn) {
+  langTh.addEventListener("click", () => changeLanguage("th"));
+  langEn.addEventListener("click", () => changeLanguage("en"));
 }
