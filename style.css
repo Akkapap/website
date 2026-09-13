@@ -404,3 +404,19 @@ p {
 }
 h1 { text-wrap: balance; }
 p  { text-wrap: pretty; }
+.btn-resume {
+  background: #fff;
+  color: #5b4bc4;
+  border: 2px solid #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.btn-resume:hover {
+  background: transparent;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
