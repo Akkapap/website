@@ -402,3 +402,5 @@ p {
   background: #6c5ce7;
   border-color: #6c5ce7;
 }
+h1 { text-wrap: balance; }
+p  { text-wrap: pretty; }
