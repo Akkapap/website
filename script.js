@@ -139,6 +139,24 @@ const translations = {
     exp_1: "เงินเทอร์โบ จำกัด มหาชน (5 เดือน)",
     exp_2: "Unithai Shipyard and Engineering (1 เดือน)",
     exp_3: "Agentplus.Th (9 เดือน)",
+    nav_services:  "บริการ",
+services_title:"บริการ",
+services_sub:  "รับงานฟรีแลนซ์ ส่งงานตรงเวลา แก้ไขจนพอใจ",
+
+srv1_title: "เว็บไซต์ Portfolio / Landing Page",
+srv1_desc:  "เว็บหน้าเดียว ดูดีทั้งคอมและมือถือ พร้อมขึ้นออนไลน์ให้",
+srv1_price: "เริ่มต้น 3,000 บาท",
+
+srv2_title: "ออกแบบ UX/UI",
+srv2_desc:  "ออกแบบหน้าจอเว็บ/แอป ส่งไฟล์ Figma พร้อมใช้งาน",
+srv2_price: "เริ่มต้น 2,000 บาท",
+
+srv3_title: "โมเดล 3D",
+srv3_desc:  "ขึ้นโมเดลสินค้า/ตัวละคร พร้อมเรนเดอร์ภาพนิ่ง",
+srv3_price: "เริ่มต้น 1,500 บาท",
+
+services_cta: "สนใจจ้างงาน หรือปรึกษาก่อนได้ครับ",
+btn_line:     "💬 ทักไลน์คุยงาน",
     projects_title: "ผลงาน",
     proj1_title: "เว็บไซต์แรกของผม",
     proj1_desc: "เว็บ Portfolio ที่ทำด้วย HTML และ CSS",
@@ -167,6 +185,24 @@ const translations = {
     exp_1: "Ngern Turbo Public Company Limited (5 months)",
     exp_2: "Unithai Shipyard and Engineering (1 month)",
     exp_3: "Agentplus.Th (9 months)",
+    nav_services:  "Services",
+services_title:"Services",
+services_sub:  "Freelance work · Delivered on time · Revisions until you're happy",
+
+srv1_title: "Portfolio / Landing Page Website",
+srv1_desc:  "A clean one-page site that looks great on desktop and mobile, deployed online for you.",
+srv1_price: "From 3,000 THB (~$85)",
+
+srv2_title: "UX/UI Design",
+srv2_desc:  "Web and app screen design, delivered as a ready-to-use Figma file.",
+srv2_price: "From 2,000 THB (~$57)",
+
+srv3_title: "3D Modeling",
+srv3_desc:  "Product and character modeling with rendered still images.",
+srv3_price: "From 1,500 THB (~$43)",
+
+services_cta: "Interested in hiring me? Feel free to reach out.",
+btn_line:     "💬 Chat on LINE",
     projects_title: "Projects",
     proj1_title: "My First Website",
     proj1_desc: "A Portfolio website built with HTML and CSS.",
@@ -200,3 +236,7 @@ if (langTh && langEn) {
   langTh.addEventListener("click", () => changeLanguage("th"));
   langEn.addEventListener("click", () => changeLanguage("en"));
 }
+
+
+
+
