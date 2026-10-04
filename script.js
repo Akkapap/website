@@ -1,12 +1,12 @@
 // ==========================================
-// 1. โค้ด Canvas หิ่งห้อยเรืองแสง + โต้ตอบเมาส์
+// 1. โค้ด Canvas หิ่งห้อยเรืองแสง + โต้ตอบเมาส์ (เวอร์ชันลื่นไหลไม่หยุดนิ่ง)
 // ==========================================
 const canvas = document.getElementById('particle-canvas');
 
 if (canvas) {
     const ctx = canvas.getContext('2d');
     let particlesArray = [];
-    const numberOfParticles = 80;
+    const numberOfParticles = 300;
 
     const mouse = {
         x: null,
@@ -21,9 +21,11 @@ if (canvas) {
     }
     setCanvasSize();
 
+    // คำนวณพิกัดเมาส์ตามตำแหน่งจริงของ Canvas
     window.addEventListener('mousemove', (e) => {
-        mouse.x = e.x;
-        mouse.y = e.y;
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
     });
 
     window.addEventListener('mousedown', () => { mouse.isPressed = true; });
@@ -31,9 +33,16 @@ if (canvas) {
 
     window.addEventListener('touchmove', (e) => {
         if (e.touches.length > 0) {
-            mouse.x = e.touches[0].clientX;
-            mouse.y = e.touches[0].clientY;
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.touches[0].clientX - rect.left;
+            mouse.y = e.touches[0].clientY - rect.top;
         }
+    });
+
+    // รีเซ็ตเมาส์เมื่อเลื่อน Scroll หน้าจอ หรือเอาเมาส์ออกนอกจอ
+    window.addEventListener('scroll', () => {
+        mouse.x = null;
+        mouse.y = null;
     });
 
     window.addEventListener('mouseleave', () => {
@@ -59,30 +68,36 @@ if (canvas) {
         }
 
         update() {
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
+            // 1. ให้หิ่งห้อยขยับลอยตัวตลอดเวลาเสมอ (ไม่หยุดนิ่งเด็ดขาด)
+            this.x += this.speedX;
+            this.y += this.speedY;
 
-            if (distance < mouse.radius) {
-                let forceDirectionX = dx / distance;
-                let forceDirectionY = dy / distance;
+            // 2. ตรวจสอบแรงผลักจากเมาส์เฉพาะเมื่อเมาส์อยู่บน Canvas จริงๆ
+            if (mouse.x !== null && mouse.y !== null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.hypot(dx, dy);
 
-                if (mouse.isPressed) {
-                    this.x += forceDirectionX * 5;
-                    this.y += forceDirectionY * 5;
-                } else {
-                    let force = (mouse.radius - distance) / mouse.radius;
-                    let directionX = forceDirectionX * force * this.density;
-                    let directionY = forceDirectionY * force * this.density;
+                if (distance < mouse.radius) {
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
 
-                    this.x -= directionX;
-                    this.y -= directionY;
+                    if (mouse.isPressed) {
+                        this.x += forceDirectionX * 4;
+                        this.y += forceDirectionY * 4;
+                    } else {
+                        // ปรับแรงผลักให้นุ่มนวล หิ่งห้อยจะลอยหลบอย่างเป็นธรรมชาติ
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        let directionX = forceDirectionX * force * 3;
+                        let directionY = forceDirectionY * force * 3;
+
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    }
                 }
-            } else {
-                this.x += this.speedX;
-                this.y += this.speedY;
             }
 
+            // ชนขอบแล้วเด้งกลับเข้าจอ
             if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
             if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
         }
